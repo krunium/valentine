@@ -49,6 +49,24 @@
             font-size: 24px;
             color: lightgray;
         }
+
+        /* Button for playing music manually if autoplay is blocked */
+        .play-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            display: none; /* Hidden unless needed */
+        }
+
+        .play-button:hover {
+            background-color: lightgray;
+        }
     </style>
 </head>
 <body>
@@ -70,6 +88,27 @@
     <!-- Centered Text -->
     <h1>TE VEO EN LA FIESTA</h1>
     <p>Te amo chiquitina</p>
+
+    <!-- Play Button (Only appears if autoplay is blocked) -->
+    <button class="play-button" id="play-button" onclick="playMusic()">🎵 Tocar Música</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var audio = document.getElementById("background-music");
+            var playButton = document.getElementById("play-button");
+
+            // Try to autoplay
+            audio.play().catch(error => {
+                console.log("Autoplay blocked. Showing play button.");
+                playButton.style.display = "block"; // Show play button if autoplay is blocked
+            });
+        });
+
+        function playMusic() {
+            var audio = document.getElementById("background-music");
+            audio.play();
+        }
+    </script>
 
 </body>
 </html>
